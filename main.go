@@ -15,14 +15,14 @@ func main() {
 	fmt.Printf("Starting server on port %s", port)
 	//fmt.Fprint(port, "Starting server on port %s")
 	http.HandleFunc("/", HelloServer)
-	http.ListenAndServe(fmt.Sprintf("0.0.0.0:%s", port), nil)
+	_ = http.ListenAndServe(fmt.Sprintf("0.0.0.0:%s", port), nil)
 }
 
 func HelloServer(w http.ResponseWriter, r *http.Request) {
 	path := r.URL.Path[1:]
 	if path != "" {
-		fmt.Fprintf(w, "Hello, %s!", r.URL.Path[1:])
+		_, _ = fmt.Fprintf(w, "Hello, %s!", r.URL.Path[1:])
 	} else {
-		fmt.Fprint(w, "Hello World!")
+		_, _ = fmt.Fprint(w, "Hello World!")
 	}
 }
